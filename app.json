@@ -4,26 +4,46 @@
     "slug": "med-stock-app",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/android-chrome-512x512.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/splash-icon.png",
+      "image": "./assets/android-chrome-512x512.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
+    "plugins": [
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "Med-Stock a besoin de la caméra pour scanner les codes-barres et photographier les médicaments."
+        }
+      ],
+      [
+        "expo-image-picker",
+        {
+          "cameraPermission": "Med-Stock a besoin de la caméra pour photographier les médicaments.",
+          "photosPermission": "Med-Stock a besoin d'accéder à vos photos pour l'extraction de texte."
+        }
+      ]
+    ],
     "ios": {
       "supportsTablet": true
     },
     "android": {
       "adaptiveIcon": {
         "backgroundColor": "#E6F4FE",
-        "foregroundImage": "./assets/android-icon-foreground.png",
-        "backgroundImage": "./assets/android-icon-background.png",
-        "monochromeImage": "./assets/android-icon-monochrome.png"
+        "foregroundImage": "./assets/android-chrome-192x192.png"
+      },
+      "permissions": [
+        "android.permission.CAMERA",
+        "android.permission.RECORD_AUDIO"
+      ]
+    },
+    "extra": {
+      "eas": {
+        "projectId": "21cd3257-6e97-409c-b03b-fd21f88e5c71"
       }
     },
-    "web": {
-      "favicon": "./assets/favicon.png"
-    }
+    "owner": "timova"
   }
 }
