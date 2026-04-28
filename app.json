@@ -37,7 +37,8 @@
       "permissions": [
         "android.permission.CAMERA",
         "android.permission.RECORD_AUDIO"
-      ]
+      ],
+      "package": "com.timova.medstockapp"
     },
     "extra": {
       "eas": {
