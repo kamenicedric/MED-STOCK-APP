@@ -24,7 +24,8 @@
           "cameraPermission": "Med-Stock a besoin de la caméra pour photographier les médicaments.",
           "photosPermission": "Med-Stock a besoin d'accéder à vos photos pour l'extraction de texte."
         }
-      ]
+      ],
+      "expo-sharing"
     ],
     "ios": {
       "supportsTablet": true
