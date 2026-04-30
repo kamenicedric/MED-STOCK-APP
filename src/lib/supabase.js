@@ -1,6 +1,7 @@
+import 'react-native-url-polyfill/auto';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { createClient } from '@supabase/supabase-js';
 
-// Utilise les variables d'environnement Expo (EXPO_PUBLIC_*) ou des placeholders pour éviter le crash
 const SUPABASE_URL =
   process.env.EXPO_PUBLIC_SUPABASE_URL ?? 'https://placeholder.supabase.co';
 const SUPABASE_ANON_KEY =
@@ -18,8 +19,9 @@ if (
 
 export const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
   auth: {
+    storage: AsyncStorage,
+    autoRefreshToken: true,
     persistSession: true,
-    storage: typeof window === 'undefined' ? undefined : window.localStorage,
+    detectSessionInUrl: false,
   },
 });
-
