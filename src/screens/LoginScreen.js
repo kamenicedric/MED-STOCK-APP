@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import {
   Alert,
+  Image,
   KeyboardAvoidingView,
   Platform,
   Pressable,
@@ -13,6 +14,7 @@ import {
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Mail, Lock, Eye, EyeOff } from 'lucide-react-native';
 import { supabase } from '../lib/supabase';
+import logo from '../../assets/android-chrome-512x512.png';
 
 const COLORS = {
   background: '#E8F4FC',
@@ -88,9 +90,9 @@ export default function LoginScreen({ navigation }) {
         {/* Logo + branding */}
         <View style={styles.logoSection}>
           <View style={styles.logoCircle}>
-            <Text style={styles.logoText}>✚</Text>
+            <Image source={logo} style={styles.logoImage} />
           </View>
-          <Text style={styles.appName}>MED-STOCK</Text>
+          {/* <Text style={styles.appName}>MED-STOCK</Text> */}
           <Text style={styles.tagline}>Gestion de Stock Pharmacie Simplifiée</Text>
         </View>
 
@@ -160,7 +162,6 @@ export default function LoginScreen({ navigation }) {
           </View>
         </View>
 
-        <Text style={styles.footer}>Propulsé par Supabase</Text>
         </ScrollView>
       </KeyboardAvoidingView>
     </SafeAreaView>
@@ -196,6 +197,11 @@ const styles = StyleSheet.create({
     fontSize: 32,
     color: COLORS.title,
     fontWeight: '700',
+  },
+  logoImage: {
+    width: 56,
+    height: 56,
+    resizeMode: 'contain',
   },
   appName: {
     fontSize: 24,

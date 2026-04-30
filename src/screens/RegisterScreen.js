@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import {
   Alert,
+  Image,
   KeyboardAvoidingView,
   Platform,
   Pressable,
@@ -14,6 +15,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
 import { Building2, MapPin, Phone, Mail, Lock, ChevronLeft, Eye, EyeOff } from 'lucide-react-native';
 import { supabase } from '../lib/supabase';
+import logo from '../../assets/android-chrome-512x512.png';
 
 const COLORS = {
   background: '#E8F4FC',
@@ -126,9 +128,9 @@ export default function RegisterScreen() {
 
         <View style={styles.logoSection}>
           <View style={styles.logoCircle}>
-            <Text style={styles.logoText}>✚</Text>
+            <Image source={logo} style={styles.logoImage} />
           </View>
-          <Text style={styles.appName}>MED-STOCK</Text>
+          {/* <Text style={styles.appName}>MED-STOCK</Text> */}
           <Text style={styles.tagline}>Inscrivez votre pharmacie</Text>
         </View>
 
@@ -304,6 +306,11 @@ const styles = StyleSheet.create({
     fontSize: 32,
     color: COLORS.title,
     fontWeight: '700',
+  },
+  logoImage: {
+    width: 56,
+    height: 56,
+    resizeMode: 'contain',
   },
   appName: {
     fontSize: 24,
