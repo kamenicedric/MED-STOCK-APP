@@ -9,16 +9,37 @@ jobs:
   ping:
     runs-on: ubuntu-latest
     steps:
+      - name: Diagnose secrets
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
+        run: |
+          echo "==== DIAGNOSTIC ===="
+          echo "SUPABASE_URL is set?       $([ -n "$SUPABASE_URL" ] && echo yes || echo NO)"
+          echo "SUPABASE_URL length:       ${#SUPABASE_URL}"
+          echo "SUPABASE_ANON_KEY is set?  $([ -n "$SUPABASE_ANON_KEY" ] && echo yes || echo NO)"
+          echo "SUPABASE_ANON_KEY length:  ${#SUPABASE_ANON_KEY}"
+          echo "===================="
+
+          if [ -z "$SUPABASE_URL" ] || [ -z "$SUPABASE_ANON_KEY" ]; then
+            echo ""
+            echo "ERREUR: au moins un des secrets est manquant ou vide."
+            echo ""
+            echo "Va sur: https://github.com/<owner>/<repo>/settings/secrets/actions"
+            echo "Et cree DEUX secrets nommes EXACTEMENT:"
+            echo "  - SUPABASE_URL"
+            echo "  - SUPABASE_ANON_KEY"
+            echo ""
+            echo "Ne pas utiliser le nom EXPO_PUBLIC_SUPABASE_URL."
+            echo "Ne pas utiliser des Variables -> il faut des Secrets."
+            exit 1
+          fi
+
       - name: Ping Supabase REST API
         env:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
         run: |
-          if [ -z "$SUPABASE_URL" ] || [ -z "$SUPABASE_ANON_KEY" ]; then
-            echo "Missing SUPABASE_URL or SUPABASE_ANON_KEY secret."
-            exit 1
-          fi
-
           STATUS=$(curl -sS -o /tmp/body.txt -w "%{http_code}" \
             -H "apikey: $SUPABASE_ANON_KEY" \
             -H "Authorization: Bearer $SUPABASE_ANON_KEY" \
